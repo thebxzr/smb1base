@@ -48,6 +48,28 @@ LoadAreaPointer:
   lda AreaAddrOffsets,y  ;from there we have our area pointer
   sta AreaPointer
 
+GetAreaType:
+  and #%01100000       ;mask out all but d6 and d5
+  asl
+  rol
+  rol
+  rol                  ;make %0xx00000 into %000000xx
+  sta TrueAreaType         ;save 2 MSB as area type
+  lda WorldNumber
+  asl
+  asl                         ;mult by 4 to allow 4 levels per world
+  ora LevelNumber             ;add level number
+  asl
+  asl                         ;mult by 4 again to fit the area types
+  ora TrueAreaType            ;area type
+  tay                         ; now x has %0wwwllaa where w is the world num l is the level num a is the areatype
+  lda AreaTypeMappingTable,y ;A now has the new area type
+  sta AreaType
+
+  LoadAreaTypeCHR
+
+  rts
+
 AreaTypeMappingTable:
   ; what the water/ground/cave/castle replace, in that order
 
@@ -122,32 +144,6 @@ AreaTypeMappingTable:
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
   ; 8-4 water       ground       underground       castle
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
-
-GetAreaType:
-  and #%01100000       ;mask out all but d6 and d5
-  asl
-  rol
-  rol
-  rol                  ;make %0xx00000 into %000000xx
-  sta TrueAreaType         ;save 2 MSB as area type
-  tay
-
-  lda WorldNumber
-  asl
-  asl                         ;mult by 4 to allow 4 levels per world
-  ora LevelNumber             ;add level number
-  asl
-  asl                         ;mult by 4 again to fit the area types
-  ora TrueAreaType            ;area type
-  tax                         ; now x has %0wwwllaa where w is the world num l is the level num a is the areatype
-  sta AreaType
-  lda AreaTypeMappingTable,x ;A now has the new area type
-
-  LoadAreaTypeCHR
-
-  rts
-
-
 
 ;-------------------------------------------------------------------------------------
 ;$00 - used in adding to get proper offset
