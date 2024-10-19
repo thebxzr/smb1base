@@ -436,6 +436,8 @@ RESERVE CurrentNTAddr_High, 1
 RESERVE CurrentNTAddr_Low, 1
 RESERVE Sprite0HitDetectFlag, 1
 RESERVE ScrollLock, 2
+
+RESERVE EndOfLevelCheck, 1
 RESERVE CurrentPageLoc, 1
 RESERVE CurrentColumnPos, 1
 RESERVE TerrainControl, 1

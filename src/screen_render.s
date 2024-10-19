@@ -64,7 +64,7 @@ SetVRAMAddr_A:
 NextSubtask:
   jmp IncSubtask           ;move onto next task
 AreaPalette:
-  .byte $01, $02, $03, $04
+  .byte $01, $02, $03, $05, $04
 
 
 ;-------------------------------------------------------------------------------------
@@ -331,11 +331,11 @@ SetVRAMOffset:
   rts
 
 BGColorCtrl_Addr:
-      .byte $00, $09, $0a, $04
+      .byte $00, $09, $0a, $04, $09
 
 BackgroundColors:
-      .byte $22, $22, $0f, $0f ;used by area type if bg color ctrl not set
-      .byte $0f, $22, $0f, $0f ;used by background color control if set
+      .byte $22, $22, $0f, $0f, $22 ;used by area type if bg color ctrl not set
+      .byte $0f, $22, $0f, $0f, $22 ;used by background color control if set
 
 PlayerColors:
       .byte $22, $16, $27, $18 ;mario's colors

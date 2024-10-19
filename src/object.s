@@ -2910,15 +2910,15 @@ RunStarFlagObj:
 
 GameTimerFireworks:
         ldy #$05               ;set default state for star flag object
-        lda GameTimerDisplay+2 ;get game timer's last digit
-        cmp #$01
-        beq SetFWC             ;if last digit of game timer set to 1, skip ahead
-        ldy #$03               ;otherwise load new value for state
-        cmp #$03
-        beq SetFWC             ;if last digit of game timer set to 3, skip ahead
-        ldy #$00               ;otherwise load one more potential value for state
-        cmp #$06
-        beq SetFWC             ;if last digit of game timer set to 6, skip ahead
+        ;lda GameTimerDisplay+2 ;get game timer's last digit
+        ;cmp #$01
+        ;beq SetFWC             ;if last digit of game timer set to 1, skip ahead
+        ;ldy #$03               ;otherwise load new value for state
+        ;cmp #$03
+        ;beq SetFWC             ;if last digit of game timer set to 3, skip ahead
+        ;ldy #$00               ;otherwise load one more potential value for state
+        ;cmp #$06
+        ;beq SetFWC             ;if last digit of game timer set to 6, skip ahead
         lda #$ff               ;otherwise set value for no fireworks
 SetFWC: sta FireworksCounter   ;set fireworks counter here
         sty Enemy_State,x      ;set whatever state we have in star flag object

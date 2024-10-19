@@ -699,6 +699,8 @@ FlagpoleSlide:
   ;  lda Enemy_ID+5           ;check special use enemy slot
   ;  cmp #FlagpoleFlagObject  ;for flagpole flag object
   ;  bne NoFPObj              ;if not found, branch to something residual
+  lda #$00                  ;disable the level end check for future
+  sta EndOfLevelCheck
   lda FlagpoleSoundQueue   ;load flagpole sound
   sta Square1SoundQueue    ;into square 1's sfx queue
   lda #$00
@@ -719,25 +721,26 @@ Hidden1UpCoinAmts:
 
 PlayerEndLevel:
   lda #$01                  ;force player to walk to the right
+  sta ScrollLock            ;stop scrolling
   jsr AutoControlPlayer
   lda Player_Y_Position     ;check player's vertical position
   cmp #$ae
   bcc ChkStop               ;if player is not yet off the flagpole, skip this part
 .if ::USE_SMB2J_FEATURES
   lda #$00
-  sta ScrollLock            ;reactivate scroll
+  sta EndOfLevelCheck       ;reactivate scroll
   lda FlagpoleMusicFlag     ;check flag to see if music was already queued
   bne ChkStop               ;if so, skip this
   lda #EndOfLevelMusic
   sta EventMusicQueue       ;load win level music in event music queue
   inc FlagpoleMusicFlag     ;set flag to keep music from getting queued more than once
 .else
-  lda ScrollLock            ;if scroll lock not set, branch ahead to next part
-  beq ChkStop               ;because we only need to do this part once
+  lda EndOfLevelCheck       ;if end of level check is set, branch ahead to next part
+  bne ChkStop               ;because we only need to do this part once
   lda #EndOfLevelMusic
   sta EventMusicQueue       ;load win level music in event music queue
-  lda #$00
-  sta ScrollLock            ;turn off scroll lock to skip this part later
+  lda #$01
+  sta EndOfLevelCheck       ;turn off end of level check to skip this part later
 .endif 
 ChkStop:
   lda Player_CollisionBits  ;get player collision bits

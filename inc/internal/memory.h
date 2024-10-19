@@ -453,6 +453,7 @@ extern u8 VictoryWalkControl[5];
 // ; Ground = 1
 // ; UnderGround = 2
 // ; Castle = 3
+// ; Desert = 4
 extern u8 AreaType;
 
 extern u8 AreaAddrsLOffset;

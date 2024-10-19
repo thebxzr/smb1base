@@ -66,6 +66,7 @@ GetAreaType:
   lda AreaTypeMappingTable,y ;A now has the new area type
   sta AreaType
 
+  tay
   LoadAreaTypeCHR
 
   rts
@@ -74,7 +75,7 @@ AreaTypeMappingTable:
   ; what the water/ground/cave/castle replace, in that order
 
   ; 1-1 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
   ; 1-2 water       ground       underground       castle
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
   ; 1-3 water       ground       underground       castle
@@ -701,7 +702,7 @@ World8Areas: .byte $30, $32, $21, $65
 ;-------------------------------------------------------------------------------------
 
 MusicSelectData:
-      .byte WaterMusic, GroundMusic, UndergroundMusic, CastleMusic
+      .byte WaterMusic, GroundMusic, UndergroundMusic, CastleMusic, GroundMusic
       .byte CloudMusic, PipeIntroMusic
 
 .proc GetAreaMusic

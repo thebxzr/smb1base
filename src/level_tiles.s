@@ -185,7 +185,7 @@ BackSceneryMetatiles:
   .byte $0e, $4e, $4e ;short tree
 
 FSceneDataOffsets:
-  .byte $00, $0d, $1a
+  .byte $00, $0d, $1a, $06
 
 ForeSceneryData:
   .byte $86, $87, $87, $87, $87, $87, $87   ;in water
@@ -198,7 +198,7 @@ ForeSceneryData:
   .byte $00, $00, $00, $00, $86, $87
 
 TerrainMetatiles:
-  .byte $69, $54, $52, $62
+  .byte $69, $54, $52, $62, $54
 
 TerrainRenderBits:
   .byte %00000000, %00000000 ;no ceiling or floor
@@ -290,8 +290,8 @@ NoFore:
 RendTerr:
       ldy AreaType               ;check world type for water level
       bne TerMTile               ;if not water level, skip this part
-        lda WorldNumber            ;check world number, if not world number eight
-        cmp #World8                ;then skip this part
+        lda LevelNumber            ;check level number, if not level 4 (castle)
+        cmp #Level4               ;then skip this part
         bne TerMTile
           lda #$62                   ;if set as water level and world number eight,
           jmp StoreMT                ;use castle wall metatile as terrain type
@@ -2097,10 +2097,10 @@ CannonExit:
 ;--------------------------------
 
 SolidBlockMetatiles:
-      .byte $69, $61, $61, $62
+      .byte $69, $61, $61, $62, $61
 
 BrickMetatiles:
-      .byte $22, $51, $52, $52
+      .byte $22, $51, $52, $52, $51
       .byte $88 ;used only by row of bricks object
 
 RowOfBricks:
@@ -2589,7 +2589,7 @@ ColObj: ldy #$00             ;column length of 1
 ;--------------------------------
 
 CoinMetatileData:
-      .byte $c3, $c2, $c2, $c2
+      .byte $c3, $c2, $c2, $c2, $c2
 
 RowOfCoins:
       ldy AreaType            ;get area type
@@ -2646,7 +2646,7 @@ Hole_Water:
 ;--------------------------------
 
 HoleMetatiles:
-      .byte $87, $00, $00, $00
+      .byte $87, $00, $00, $00, $00
 
 Hole_Empty:
             jsr ChkLrgObjLength          ;get lower nybble and save as length
