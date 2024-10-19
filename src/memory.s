@@ -479,6 +479,8 @@ RESERVE VictoryWalkControl, 5
 ; Castle = 3
 RESERVE AreaType, 1
 
+RESERVE TrueAreaType, 1
+
 RESERVE AreaAddrsLOffset, 1
 RESERVE AreaPointer, 1
 RESERVE EntrancePage, 1

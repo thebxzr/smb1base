@@ -299,8 +299,8 @@ HandlePECollisions:
        beq ChkForPlayerInjury
        cpy #$15                     ;branch if object => $15
        bcs InjurePlayer
-       lda AreaType                 ;branch if water type level
-       beq InjurePlayer
+       ;lda AreaType                 ;branch if water type level
+       ;beq InjurePlayer
        lda Enemy_State,x            ;branch if d7 of enemy state was set
        asl
        bcs ChkForPlayerInjury
@@ -405,6 +405,10 @@ EnemyStomped:
       cmp #BulletBill_FrenzyVar  ;branch for either bullet bill object
       beq EnemyStompedPts
       cmp #BulletBill_CannonVar
+      beq EnemyStompedPts
+      cmp #RedCheepCheep         ;branch for either cheep cheep
+      beq EnemyStompedPts
+      cmp #GreyCheepCheep        
       beq EnemyStompedPts
       cmp #Podoboo               ;branch for podoboo (this branch is logically impossible
       beq EnemyStompedPts        ;for cpu to take due to earlier checking of podoboo)
@@ -899,14 +903,16 @@ NearbyRTS:
       rts
 
 Shroom_Flower_PUp:
-      lda PlayerStatus    ;if player status = small, branch
+      lda PowerUpType,x   ;if powerup is a mushroom, branch
       beq UpToSuper
-      cmp #$01            ;if player status not super, leave
+      cmp #$01            ;if powerup isn't a flower, leave (??? why is this here)
       bne NearbyRTS
       ldx ObjectOffset    ;get enemy offset, not necessary
       lda #$02            ;set player status to fiery
       sta PlayerStatus
       farcall GetPlayerColors ;run sub to change colors of player
+      lda #0              ;make the player big model, even if small (part of the small -> fire fix)
+      sta PlayerSize
       ldx ObjectOffset    ;get enemy offset again, and again not necessary
       lda #$0c            ;set value to be used by subroutine tree (fiery)
       jmp UpToFiery       ;jump to set values accordingly

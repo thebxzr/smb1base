@@ -239,4 +239,13 @@ Down_Dir              = %00000100
 Left_Dir              = %00000010
 Right_Dir             = %00000001
 
+
+AREA_WATER = $00
+
+AREA_GROUND = $01
+
+AREA_UNDERGROUND = $02
+
+AREA_CASTLE = $03
+
 .endif ;__CONSTANTS_INC

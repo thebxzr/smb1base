@@ -560,6 +560,8 @@ MetaspriteBowserFlame:
 
 
 
+
+
 ;;;;
 ; Internal use
 ; Generate the lookup tables for the metasprites used by the renderer.

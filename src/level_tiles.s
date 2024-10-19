@@ -5,6 +5,7 @@
   lda AreaPointer          ;use 2 MSB for Y
   jsr GetAreaType
   tay
+  ldy TrueAreaType
   lda AreaPointer          ;mask out all but 5 LSB
   and #%00011111
   sta AreaAddrsLOffset     ;save as low offset
@@ -16,7 +17,7 @@
   sta EnemyDataLow
   lda EnemyDataAddrHigh,y
   sta EnemyDataHigh
-  ldy AreaType             ;use area type as offset
+  ldy TrueAreaType         ;use TRUE area type as offset
   lda AreaDataHOffsets,y   ;do the same thing but with different base value
   clc
   adc AreaAddrsLOffset        
