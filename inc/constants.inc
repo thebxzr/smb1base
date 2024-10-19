@@ -184,7 +184,6 @@ FIREFLOWER_BOX_METATILE = $c1
   GroundPaletteDataOffset
   UndergroundPaletteDataOffset
   CastlePaletteDataOffset
-  DesertPaletteDataOffset
   VRAM_Buffer1_OffsetOffset
   VRAM_Buffer2Offset
   VRAM_Buffer2Offset2
@@ -200,6 +199,7 @@ FIREFLOWER_BOX_METATILE = $c1
   WorldSelectMessage1Offset
   WorldSelectMessage2Offset
   TitleScreenDataOffset
+  DesertPaletteDataOffset
 .endenum
 
 .enum

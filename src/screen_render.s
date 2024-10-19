@@ -64,7 +64,7 @@ SetVRAMAddr_A:
 NextSubtask:
   jmp IncSubtask           ;move onto next task
 AreaPalette:
-  .byte $01, $02, $03, $05, $04
+  .byte $01, $02, $03, $04, $14
 
 
 ;-------------------------------------------------------------------------------------
