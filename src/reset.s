@@ -359,7 +359,6 @@ OnCooldown:
       WaterPaletteData, \
       GroundPaletteData, \
       UndergroundPaletteData, \
-      DesertPaletteData, \
       CastlePaletteData, \
       VRAM_Buffer1_Offset, \
       VRAM_Buffer2, \
@@ -375,7 +374,8 @@ OnCooldown:
       PrincessSaved2, \
       WorldSelectMessage1, \
       WorldSelectMessage2, \
-      TitleScreenData
+      TitleScreenData, \
+      DesertPaletteData
 
 clabel VRAM_AddrTable_Low
 clabel VRAM_AddrTable_High

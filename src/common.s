@@ -84,13 +84,13 @@ AreaTypeMappingTable:
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
 
   ; 2-1 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
   ; 2-2 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
   ; 2-3 water       ground       underground       castle
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
   ; 2-4 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
 
   ; 3-1 water       ground       underground       castle
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
@@ -111,13 +111,13 @@ AreaTypeMappingTable:
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
 
   ; 5-1 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
   ; 5-2 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
   ; 5-3 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
   ; 5-4 water       ground       underground       castle
-  .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE
+  .byte AREA_WATER, AREA_DESERT, AREA_UNDERGROUND, AREA_CASTLE
 
   ; 6-1 water       ground       underground       castle
   .byte AREA_WATER, AREA_GROUND, AREA_UNDERGROUND, AREA_CASTLE

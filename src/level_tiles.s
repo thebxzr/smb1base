@@ -2162,8 +2162,10 @@ BrickWithItem:
           sty R7               
           lda #$00                    ;load default adder for bricks with lines
           ldy AreaType                ;check level type for ground level
-          dey
+          cpy #$01
           beq BWithL                  ;if ground type, do not start with 5
+          cpy #$04
+          beq BWithL                  ;if desert type, do not start with 5
           lda #$05                    ;otherwise use adder for bricks without lines
 BWithL:   clc                         ;add object ID to adder
           adc R7 

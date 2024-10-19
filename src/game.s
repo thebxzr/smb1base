@@ -567,6 +567,7 @@ Palette3Data:
        .byte $0f, $07, $17, $0f
        .byte $0f, $07, $17, $1c
        .byte $0f, $07, $17, $00
+       .byte $0f, $07, $17, $0f
 
 ColorRotation:
               lda FrameCounter         ;get frame counter
