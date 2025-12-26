@@ -47,13 +47,10 @@ LoadAreaPointer:
   tay
   lda AreaAddrOffsets,y  ;from there we have our area pointer
   sta AreaPointer
+
 GetAreaType:
-  and #%01100000       ;mask out all but d6 and d5
-  asl
-  rol
-  rol
-  rol                  ;make %0xx00000 into %000000xx
-  sta AreaType         ;save 2 MSB as area type
+  ;assume that "a" holds the area type
+  sta AreaType         ;save as area type
   tay
 
   LoadAreaTypeCHR
@@ -603,14 +600,14 @@ WorldAddrOffsets:
   .byte World7Areas-AreaAddrOffsets, World8Areas-AreaAddrOffsets
 
 AreaAddrOffsets:
-World1Areas: .byte $25, $29, $c0, $26, $60
-World2Areas: .byte $28, $29, $01, $27, $62
-World3Areas: .byte $24, $35, $20, $63
-World4Areas: .byte $22, $29, $41, $2c, $61
-World5Areas: .byte $2a, $31, $26, $62
-World6Areas: .byte $2e, $23, $2d, $60
-World7Areas: .byte $33, $29, $01, $27, $64
-World8Areas: .byte $30, $32, $21, $65
+World1Areas: .byte $08, $0c, $19, $09, $1c  ; $25, $29, $c0, $26, $60
+World2Areas: .byte $0b, $0c, $01, $0a, $1e  ; $28, $29, $01, $27, $62
+World3Areas: .byte $07, $18, $03, $1f       ; $24, $35, $20, $63
+World4Areas: .byte $05, $0c, $1a, $0f, $1d  ; $22, $29, $41, $2c, $61
+World5Areas: .byte $0d, $14, $09, $1e       ; $2a, $31, $26, $62
+World6Areas: .byte $11, $06, $10, $1c       ; $2e, $23, $2d, $60
+World7Areas: .byte $16, $0c, $01, $0a, $20  ; $33, $29, $01, $27, $64
+World8Areas: .byte $13, $15, $04, $21       ; $30, $32, $21, $65
 
 
 ;-------------------------------------------------------------------------------------
