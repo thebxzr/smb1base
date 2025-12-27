@@ -1,6 +1,27 @@
 
 .segment "LEVEL"
 
+;HEADER FORMAT (old)
+; TTMMMBBB LLSSFFFF
+; T = timer
+; M = mario starting Y position
+; B = backdrop (water/bricks + ground palettes)
+; S = scenery (clouds, hills)
+; L = platform (trees, mushrooms + red pal, bullets, cloud)
+; F = floor type pattern
+
+;HEADER FORMAT (new)
+; TTMMMCBB LLSSFFFF PPPPAAAA XXXXXXXX
+; T = timer
+; M = mario starting Y postiion
+; C = cloud override (cloud floor tile), to be changed
+; B = backdrop (no palettes)
+; L = platorm (trees, mushrooms, bullets, SMB2J clouds)
+; F = floor type
+; P = palette (changes per area)
+; A = area type
+; X = unused
+
 .proc GetAreaDataAddrs
   ldy AreaPointer          ;load the area pointer to Y
   lda EnemyDataAddrLow,y   ;use offset to load enemy data
@@ -14,14 +35,15 @@
   ldy #$00                 ;load first byte of header
   lda (AreaData),y     
   pha                      ;save it to the stack for now
-  and #%00000111           ;save 3 LSB for foreground scenery or bg color control
-  cmp #$04
-  bcc StoreFore
-  sta BackgroundColorCtrl  ;if 4 or greater, save value here as bg color control
-  lda #$00
-StoreFore:
+  and #%00000011           ;save 2 LSB for foreground scenery or bg color control
   sta ForegroundScenery    ;if less, save value here as foreground scenery
   pla                      ;pull byte from stack and push it back
+  pha
+  and #%00000100           ;get cloud override byte
+  lsr                      ;shift to LSB
+  lsr
+  sta CloudTypeOverride    ;rotate and store
+  pla
   pha
   and #%00111000           ;save player entrance control bits
   lsr                      ;shift bits over to LSBs
@@ -54,9 +76,8 @@ StoreFore:
   rol                      ;rotate bits over to LSBs
   rol
   rol
-  cmp #%00000011           ;if set to 3, store here
-  bne StoreStyle           ;and nullify other value
-  sta CloudTypeOverride    ;otherwise store value in other place
+  cmp #%00000011           ;if set to 3,
+  bne StoreStyle           ;override to 0 (leftovers for cloud type, will change to cloud platforms later)
   lda #$00
 StoreStyle:
   sta AreaStyle
@@ -65,6 +86,9 @@ StoreStyle:
   pha                      ;save it to the stack
   and #%00001111           ;mask to isolate lower nybble for area type
   jsr GetAreaType
+  pla                      ;get other nybble
+  and #%11110000
+  sta AreaPaletteType      ;save to the palette type
   lda AreaDataLow          ;increment area data address by 4 bytes (expanded header)
   clc
   adc #$04
@@ -629,12 +653,8 @@ AlterAreaAttributes:
          sta BackgroundScenery     ;then leave
          rts
 Alter2:  pla
-         and #%00000111            ;mask out all but 3 LSB
-         cmp #$04                  ;if four or greater, set color control bits
-         bcc SetFore               ;and nullify foreground scenery bits
-         sta BackgroundColorCtrl
-         lda #$00
-SetFore: sta ForegroundScenery     ;otherwise set new foreground scenery bits
+         and #%00000011            ;mask out all but 2 LSB
+         sta ForegroundScenery     ;set new foreground scenery bits
          rts
 
 

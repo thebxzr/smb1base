@@ -459,6 +459,7 @@ RESERVE HorizontalScroll, 1
 RESERVE VerticalScroll, 1
 RESERVE ForegroundScenery, 1
 RESERVE BackgroundScenery, 1
+RESERVE AreaPaletteType, 1
 RESERVE CloudTypeOverride, 1
 RESERVE BackgroundColorCtrl, 1
 RESERVE LoopCommand, 1
